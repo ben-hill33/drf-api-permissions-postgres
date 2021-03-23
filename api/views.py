@@ -6,12 +6,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class TaskList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = IsAuthenticatedOrReadOnly
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsOwnerOrReadOnly,)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = IsOwnerOrReadOnly
